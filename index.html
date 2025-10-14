@@ -6,80 +6,314 @@
   <title>tmrw.it</title>
   <link rel="icon" type="image/png" href="/favicon-dark.png">
   <meta name="description" content="tmrw.it — independent studio building digital things for tomorrow. Projects, apps, platforms and experiments from TMRW LLC.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: monospace;
-      background: #000;
-      color: #fff;
-      max-width: 700px;
-      margin: 60px auto;
-      line-height: 1.6;
-      padding: 0 20px;
+    :root {
+      --bg-graphite: #0E0E0E;
+      --bg-graphite-2: #141414;
+      --text-primary: #F5F5F5;
+      --text-muted: #B7BDC6;
+      --accent-blue: #4AB2F7;
+      --accent-amber: #EBA94A;
+      --success: #3ECF8E;
+      --danger: #FF6B6B;
+      --stroke: rgba(255, 255, 255, 0.1);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --focus-ring: rgba(74, 178, 247, 0.6);
+      --font-body: "Inter", "Segoe UI", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+      --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --content-max-width: 1120px;
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 32px;
+      --space-5: 48px;
+      --space-6: 64px;
+      color-scheme: dark;
     }
 
-    a {
-      color: #fff;
-      text-decoration: underline;
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      background: radial-gradient(circle at top left, rgba(74, 178, 247, 0.07), transparent 55%), var(--bg-graphite);
+      color: var(--text-primary);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-5) var(--space-3) var(--space-6);
+    }
+
+    main {
+      width: 100%;
+      max-width: var(--content-max-width);
+      display: grid;
+      gap: var(--space-5);
+    }
+
+    header {
+      display: grid;
+      gap: var(--space-3);
     }
 
     h1 {
+      margin: 0;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: 0.02em;
       text-transform: lowercase;
-      font-size: 2.5rem;
-      margin-bottom: 0.5em;
     }
 
     h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: 0.02em;
       text-transform: lowercase;
-      font-size: 1rem;
-      margin-top: 2em;
-      margin-bottom: 0.5em;
     }
 
-    hr {
-      border: none;
-      border-top: 1px solid #fff;
-      margin: 2em 0;
+    h3 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.2vw, 2rem);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      text-transform: lowercase;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    p + p {
+      margin-top: var(--space-2);
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      position: relative;
+      transition: color 300ms ease, text-shadow 300ms ease;
+    }
+
+    a::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -3px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(74, 178, 247, 0.4), rgba(74, 178, 247, 0));
+      transition: opacity 300ms ease;
+      opacity: 0.6;
+    }
+
+    a:hover {
+      color: var(--text-primary);
+      text-shadow: 0 0 20px rgba(74, 178, 247, 0.4);
+    }
+
+    a:hover::after {
+      opacity: 1;
+      background: linear-gradient(90deg, rgba(74, 178, 247, 0.8), rgba(74, 178, 247, 0.2));
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    .hero {
+      background: var(--bg-graphite-2);
+      border: 1px solid var(--panel-border);
+      border-radius: 24px;
+      padding: clamp(var(--space-4), 5vw, var(--space-6));
+      display: grid;
+      gap: var(--space-3);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(74, 178, 247, 0.08), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: -1;
+    }
+
+    .hero p {
+      color: var(--text-primary);
+      max-width: 40ch;
+    }
+
+    .grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .panel {
+      background: var(--bg-graphite-2);
+      border: 1px solid var(--panel-border);
+      border-radius: 20px;
+      padding: var(--space-4);
+      display: grid;
+      gap: var(--space-3);
+      box-shadow: 0 0 25px rgba(74, 178, 247, 0.08);
+      transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-4px);
+      border-color: rgba(74, 178, 247, 0.3);
+      box-shadow: 0 0 25px rgba(74, 178, 247, 0.25);
+    }
+
+    .list {
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .list-item {
+      display: grid;
+      gap: 4px;
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .list-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .list-item strong {
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .list-item span {
+      font-size: 0.95rem;
+      color: var(--text-muted);
     }
 
     footer {
-      margin-top: 3em;
-      color: #888;
-      font-size: 0.9rem;
+      margin-top: var(--space-5);
+      padding-top: var(--space-3);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      width: 100%;
+      max-width: var(--content-max-width);
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--accent-amber);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: var(--space-4) var(--space-3) var(--space-5);
+      }
+
+      main {
+        gap: var(--space-4);
+      }
+
+      .panel {
+        padding: var(--space-3);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
 <body>
+  <main>
+    <header class="hero">
+      <h1>tmrw.it</h1>
+      <p>Independent studio building digital products for tomorrow with precision, clarity and calm confidence.</p>
+    </header>
 
-  <h1>tmrw.it</h1>
-  <p>independent studio building digital things for tomorrow.</p>
+    <section class="panel">
+      <h2>projects</h2>
+      <div class="list">
+        <div class="list-item">
+          <strong><a href="https://timestalesgo.com" target="_blank" rel="noopener">Times Tales Go!</a></strong>
+          <span>Mobile app • ad-supported</span>
+        </div>
+        <div class="list-item">
+          <strong><a href="https://clapback.app" target="_blank" rel="noopener">clapback</a></strong>
+          <span>Social app • in development</span>
+        </div>
+        <div class="list-item">
+          <strong><a href="https://simpletherapy.app" target="_blank" rel="noopener">simple therapy</a></strong>
+          <span>Social app • in development</span>
+        </div>
+        <div class="list-item">
+          <strong><a href="https://www.npmjs.com/package/tmrw-audit" target="_blank" rel="noopener">tmrw-audit</a></strong>
+          <span>Infrastructure security • CLI</span>
+        </div>
+        <div class="list-item">
+          <strong><a href="https://n2n.work" target="_blank" rel="noopener">n2n.work</a></strong>
+          <span>Consulting • available for hire</span>
+        </div>
+        <div class="list-item">
+          <strong><a href="https://fathomwater.com" target="_blank" rel="noopener">fathom</a></strong>
+          <span>Corporate website • web</span>
+        </div>
+        <div class="list-item">
+          <strong><a href="https://www.attuned-counseling.com" target="_blank" rel="noopener">attuned counseling</a></strong>
+          <span>Therapist website • web</span>
+        </div>
+      </div>
+    </section>
 
-  <hr>
+    <section class="panel">
+      <h2>about</h2>
+      <div class="grid">
+        <p>We craft apps, tools, platforms and experiments that balance delightful consumer experiences with resilient, secure infrastructure.</p>
+        <p>From ad-supported mobile products to long-term product partnerships, we bring systems thinking, technical warmth and product craft to every engagement.</p>
+      </div>
+    </section>
 
-  <section>
-    <h2>projects</h2>
-    <p><a href="https://timestalesgo.com" target="_blank">Times Tales Go!</a> – mobile app (ad-based)</p>
-    <p><a href="https://clapback.app" target="_blank">clapback</a> – social app (in development)</p>
-    <p><a href="https://simpletherapy.app" target="_blank">simple therapy</a> – social app (in development)</p>
-    <p><a href="https://www.npmjs.com/package/tmrw-audit" target="_blank">tmrw-audit</a> – infrastructure security (CLI)</p>
-    <p><a href="https://n2n.work" target="_blank">n2n.work</a> – for hire (consulting)</p>
-    <p><a href="https://fathomwater.com" target="_blank">fathom</a> – corporate website (web)</p>
-    <p><a href="https://www.attuned-counseling.com" target="_blank">attuned counseling</a> – therapist website (web)</p>
-  </section>
-
-  <section>
-    <h2>about</h2>
-    <p>We build apps, tools, platforms and experiments — from ad-supported mobile projects to larger consumer apps.</p>
-  </section>
-
-  <section>
-    <h2>contact</h2>
-    <p><a href="mailto:hello@tmrw.it">hello@tmrw.it</a></p>
-  </section>
+    <section class="panel">
+      <h2>contact</h2>
+      <div class="grid">
+        <p>New projects, collaborations or press — email <a href="mailto:hello@tmrw.it">hello@tmrw.it</a>.</p>
+        <p>Security questions? Reach us at <code>security@tmrw.it</code>.</p>
+      </div>
+    </section>
+  </main>
 
   <footer>
     © TMRW LLC — 2025
   </footer>
-
 </body>
 </html>
-
