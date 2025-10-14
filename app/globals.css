@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Inter", "Segoe UI", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply min-h-screen bg-graphite text-slate-100 antialiased;
+  background-image: radial-gradient(circle at top left, rgba(74, 178, 247, 0.07), transparent 55%);
+}
+
+code {
+  @apply font-mono text-sm text-accent-amber;
+}
+
+main {
+  @apply mx-auto flex w-full max-w-content flex-1 flex-col gap-12 px-6 py-16 md:py-20;
+}
+
+a {
+  @apply text-accent-blue no-underline transition duration-300 ease-in-out;
+}
+
+a:hover {
+  @apply text-white;
+  text-shadow: 0 0 20px rgba(74, 178, 247, 0.4);
+}
+
+a:focus-visible {
+  @apply outline-none;
+  box-shadow: 0 0 0 2px rgba(74, 178, 247, 0.6);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  main {
+    @apply gap-10 px-5 py-14;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
